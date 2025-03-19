@@ -223,6 +223,10 @@ HRESULT RenderClass::InitBufferShader() {
     ID3D11Resource* texture = nullptr;
     hr = CreateWICTextureFromFileEx(m_pDevice, m_pDeviceContext, L"cat.png", 0, D3D11_USAGE_DEFAULT,
         D3D11_BIND_SHADER_RESOURCE | D3D11_BIND_RENDER_TARGET, D3D11_CPU_ACCESS_FLAG(0), D3D11_RESOURCE_MISC_GENERATE_MIPS, WIC_LOADER_DEFAULT, &texture, &m_pTextureView);
+    if (texture) {
+        texture->Release();
+    }
+
     if (FAILED(hr))
         return hr;
 
@@ -419,6 +423,8 @@ void RenderClass::Terminate() {
         m_pDevice->Release();
         m_pDevice = nullptr;
     }
+
+    CoUninitialize();
 }
 
 void RenderClass::TerminateBufferShader() {
