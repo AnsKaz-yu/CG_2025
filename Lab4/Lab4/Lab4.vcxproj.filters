@@ -76,7 +76,4 @@
       <DestinationFolder>$(OutDir)</DestinationFolder>
     </CopyFileToFolders>
   </ItemGroup>
-  <ItemGroup>
-    <None Include="packages.config" />
-  </ItemGroup>
 </Project>
