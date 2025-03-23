@@ -226,7 +226,7 @@ HRESULT RenderClass::InitBufferShader() {
     if (texture) {
         texture->Release();
     }
-
+    
     if (FAILED(hr))
         return hr;
 
@@ -423,7 +423,7 @@ void RenderClass::Terminate() {
         m_pDevice->Release();
         m_pDevice = nullptr;
     }
-
+    
     CoUninitialize();
 }
 
