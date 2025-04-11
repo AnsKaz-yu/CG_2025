@@ -99,39 +99,47 @@
     <Image Include="Lab4.ico">
       <Filter>Файлы ресурсов</Filter>
     </Image>
-    <Image Include="skybox.png">
-      <Filter>Файлы ресурсов</Filter>
-    </Image>
-    <Image Include="cat.png">
-      <Filter>Файлы ресурсов</Filter>
-    </Image>
-    <Image Include="cube_normal.dds">
-      <Filter>Файлы ресурсов</Filter>
-    </Image>
+        <CopyFileToFolders Include="cat.png">
+      <FileType>Document</FileType>
+      <DestinationFolder>$(OutDir)</DestinationFolder>
+    </CopyFileToFolders>
+    <CopyFileToFolders Include="skybox.png">
+      <FileType>Document</FileType>
+      <DestinationFolder>$(OutDir)</DestinationFolder>
+    </CopyFileToFolders>
+    <CopyFileToFolders Include="cube_normal.dds">
+      <FileType>Document</FileType>
+      <DestinationFolder>$(OutDir)</DestinationFolder>
+    </CopyFileToFolders>
   </ItemGroup>
   <ItemGroup>
     <CopyFileToFolders Include="ColorPixel.ps">
-      <Filter>Shaders</Filter>
+      <FileType>Document</FileType>
+      <DestinationFolder>$(OutDir)</DestinationFolder>
     </CopyFileToFolders>
     <CopyFileToFolders Include="ColorVertex.vs">
-      <Filter>Shaders</Filter>
+      <FileType>Document</FileType>
+      <DestinationFolder>$(OutDir)</DestinationFolder>
     </CopyFileToFolders>
     <CopyFileToFolders Include="SkyboxPixel.ps">
-      <Filter>Shaders</Filter>
+      <FileType>Document</FileType>
+      <DestinationFolder>$(OutDir)</DestinationFolder>
     </CopyFileToFolders>
     <CopyFileToFolders Include="SkyboxVertex.vs">
-      <Filter>Shaders</Filter>
+      <FileType>Document</FileType>
+      <DestinationFolder>$(OutDir)</DestinationFolder>
     </CopyFileToFolders>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="ParallelogramPixel.ps">
-      <Filter>Shaders</Filter>
-    </None>
-    <None Include="ParallelogramVertex.vs">
-      <Filter>Shaders</Filter>
-    </None>
-    <None Include="LightPixel.ps">
-      <Filter>Shaders</Filter>
-    </None>
+    <CopyFileToFolders Include="ParallelogramPixel.ps">
+      <FileType>Document</FileType>
+      <DestinationFolder>$(OutDir)</DestinationFolder>
+    </CopyFileToFolders>
+    <CopyFileToFolders Include="ParallelogramVertex.vs">
+      <FileType>Document</FileType>
+      <DestinationFolder>$(OutDir)</DestinationFolder>
+    </CopyFileToFolders>
+    <CopyFileToFolders Include="LightPixel.ps">
+      <FileType>Document</FileType>
+      <DestinationFolder>$(OutDir)</DestinationFolder>
+    </CopyFileToFolders>
   </ItemGroup>
 </Project>
