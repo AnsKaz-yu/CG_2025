@@ -63,6 +63,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 
     if (g_Render)
     {
+        
         g_Render->Terminate();
         delete g_Render;
         g_Render = nullptr;

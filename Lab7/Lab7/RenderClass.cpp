@@ -124,10 +124,11 @@ HRESULT RenderClass::InitBufferShader() {
         {"TEXCOORD", 0, DXGI_FORMAT_R32G32_FLOAT, 0, offsetof(CubeVertex, uv), D3D11_INPUT_PER_VERTEX_DATA, 0}
     };
 
-    HRESULT hr = CoInitializeEx(nullptr, COINIT_MULTITHREADED);
+    HRESULT hr = CoInitializeEx(nullptr, COINIT_MULTITHREADED); 
+    bComInitialized = (hr == S_OK);
     if (FAILED(hr) && hr != RPC_E_CHANGED_MODE) {
         OutputDebugString(L"COM initialization failed.\n");
-        return hr;
+        return hr; 
     }
 
     ID3DBlob* pVertexCode = nullptr;
@@ -309,6 +310,7 @@ HRESULT RenderClass::Init2DArray()
         return result;
 
     m_pDeviceContext->GenerateMips(m_pTextureView);
+    m_pTextureView->Release();
 
     result = CreateWICTextureFromFileEx(m_pDevice, m_pDeviceContext, L"textile.png", 0, D3D11_USAGE_DEFAULT,
         D3D11_BIND_SHADER_RESOURCE | D3D11_BIND_RENDER_TARGET, D3D11_CPU_ACCESS_FLAG(0), D3D11_RESOURCE_MISC_GENERATE_MIPS, WIC_LOADER_DEFAULT, &pTextureResources[1], &m_pTextureView);
@@ -317,6 +319,7 @@ HRESULT RenderClass::Init2DArray()
         return result;
 
     m_pDeviceContext->GenerateMips(m_pTextureView);
+    m_pTextureView->Release();
 
     ID3D11Texture2D* pTexture = nullptr;
     pTextureResources[0]->QueryInterface(__uuidof(ID3D11Texture2D), (void**)&pTexture);
@@ -619,7 +622,8 @@ void RenderClass::Terminate() {
         m_pDevice = nullptr;
     }
     
-    CoUninitialize();
+    if (bComInitialized) 
+        CoUninitialize();
     ImGui_ImplDX11_Shutdown();
     ImGui_ImplWin32_Shutdown();
     ImGui::DestroyContext();

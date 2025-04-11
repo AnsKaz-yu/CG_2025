@@ -52,6 +52,7 @@ public:
         m_pFullScreenVB(nullptr),
         m_pFullScreenLayout(nullptr),
         m_pModelBufferInst(nullptr),
+        m_pColorBuffer(nullptr),
         m_CameraPosition(0.0f, 1.5f, -10.0f),
         m_CameraSpeed(0.1f),
         m_LRAngle(0.0f),
@@ -194,6 +195,8 @@ private:
     ID3D11Buffer* m_pFullScreenVB;
     ID3D11InputLayout* m_pFullScreenLayout;
     bool m_useNegative = false;
+
+    bool bComInitialized = false;
 
     const float m_fixedScale = 0.5f;
     ID3D11Buffer* m_pModelBufferInst;
