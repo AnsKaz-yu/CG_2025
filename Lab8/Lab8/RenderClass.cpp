@@ -507,6 +507,7 @@ HRESULT RenderClass::Init2DArray()
         return result;
 
     m_pDeviceContext->GenerateMips(m_pTextureView);
+    m_pTextureView->Release();
 
     result = CreateWICTextureFromFileEx(m_pDevice, m_pDeviceContext, L"textile.png", 0, D3D11_USAGE_DEFAULT,
         D3D11_BIND_SHADER_RESOURCE | D3D11_BIND_RENDER_TARGET, D3D11_CPU_ACCESS_FLAG(0), D3D11_RESOURCE_MISC_GENERATE_MIPS, WIC_LOADER_DEFAULT, &pTextureResources[1], &m_pTextureView);
@@ -515,6 +516,7 @@ HRESULT RenderClass::Init2DArray()
         return result;
 
     m_pDeviceContext->GenerateMips(m_pTextureView);
+    m_pTextureView->Release();
 
     ID3D11Texture2D* pTexture = nullptr;
     pTextureResources[0]->QueryInterface(__uuidof(ID3D11Texture2D), (void**)&pTexture);
@@ -790,6 +792,7 @@ void RenderClass::Terminate() {
     TerminateBufferShader();
     TerminateSkybox();
     TerminateParallelogram();
+    TerminateComputeShader();
 
     if (m_pDeviceContext) {
         m_pDeviceContext->ClearState();

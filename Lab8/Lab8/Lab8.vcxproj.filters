@@ -124,35 +124,71 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <Image Include="cat.png">
-      <Filter>Файлы ресурсов</Filter>
-    </Image>
+    <CopyFileToFolders Include="cat.png">
+      <FileType>Document</FileType>
+      <DestinationFolder>$(OutDir)</DestinationFolder>
+    </CopyFileToFolders>
+    <CopyFileToFolders Include="skybox.png">
+      <FileType>Document</FileType>
+      <DestinationFolder>$(OutDir)</DestinationFolder>
+    </CopyFileToFolders>
     <Image Include="cube_normal.dds" />
     <Image Include="Lab4.ico">
-      <Filter>Файлы ресурсов</Filter>
-    </Image>
-    <Image Include="skybox.png">
       <Filter>Файлы ресурсов</Filter>
     </Image>
     <Image Include="small.ico">
       <Filter>Файлы ресурсов</Filter>
     </Image>
-    <Image Include="textile.png">
-      <Filter>Файлы ресурсов</Filter>
-    </Image>
+    <CopyFileToFolders Include="textile.png">
+      <FileType>Document</FileType>
+      <DestinationFolder>$(OutDir)</DestinationFolder>
+    </CopyFileToFolders>
+    <CopyFileToFolders Include="cube_normal.dds">
+      <FileType>Document</FileType>
+      <DestinationFolder>$(OutDir)</DestinationFolder>
+    </CopyFileToFolders>
   </ItemGroup>
   <ItemGroup>
-    <None Include="ColorPixel.ps" />
-    <None Include="ColorVertex.vs" />
-    <None Include="ComputeShader.cs" />
-    <None Include="imgui.ini" />
-    <None Include="LightPixel.ps" />
-    <None Include="NegativePixel.ps" />
-    <None Include="NegativeVertex.vs" />
-    <None Include="ParallelogramPixel.ps" />
-    <None Include="ParallelogramVertex.vs" />
-    <None Include="SkyboxPixel.ps" />
-    <None Include="SkyboxVertex.vs" />
+    <CopyFileToFolders Include="ColorPixel.ps">
+      <FileType>Document</FileType>
+      <DestinationFolder>$(OutDir)</DestinationFolder>
+    </CopyFileToFolders>
+    <CopyFileToFolders Include="ColorVertex.vs">
+      <FileType>Document</FileType>
+      <DestinationFolder>$(OutDir)</DestinationFolder>
+    </CopyFileToFolders>
+    <CopyFileToFolders Include="SkyboxPixel.ps">
+      <FileType>Document</FileType>
+      <DestinationFolder>$(OutDir)</DestinationFolder>
+    </CopyFileToFolders>
+    <CopyFileToFolders Include="SkyboxVertex.vs">
+      <FileType>Document</FileType>
+      <DestinationFolder>$(OutDir)</DestinationFolder>
+    </CopyFileToFolders>
+    <CopyFileToFolders Include="ParallelogramPixel.ps">
+      <FileType>Document</FileType>
+      <DestinationFolder>$(OutDir)</DestinationFolder>
+    </CopyFileToFolders>
+    <CopyFileToFolders Include="ParallelogramVertex.vs">
+      <FileType>Document</FileType>
+      <DestinationFolder>$(OutDir)</DestinationFolder>
+    </CopyFileToFolders>
+    <CopyFileToFolders Include="LightPixel.ps">
+      <FileType>Document</FileType>
+      <DestinationFolder>$(OutDir)</DestinationFolder>
+    </CopyFileToFolders>
+    <CopyFileToFolders Include="NegativePixel.ps">
+      <FileType>Document</FileType>
+      <DestinationFolder>$(OutDir)</DestinationFolder>
+    </CopyFileToFolders>
+    <CopyFileToFolders Include="NegativeVertex.vs">
+      <FileType>Document</FileType>
+      <DestinationFolder>$(OutDir)</DestinationFolder>
+    </CopyFileToFolders>
+    <CopyFileToFolders Include="ComputeShader.cs" >
+      <FileType>Document</FileType>
+      <DestinationFolder>$(OutDir)</DestinationFolder>
+    </CopyFileToFolders>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Lab4.rc">
