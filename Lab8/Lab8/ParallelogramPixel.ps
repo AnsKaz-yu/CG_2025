@@ -1,0 +1,39 @@
+cbuffer ColorBuffer : register(b0)
+{
+    float4 Color;
+};
+
+cbuffer LightBuffer : register(b2)
+{
+    struct PointLight
+    {
+        float3 Position;
+        float Range;
+        float3 Color;
+        float Intensity;
+    };
+    PointLight lights[2];
+};
+
+struct PSInput
+{
+    float4 pos : SV_Position;
+    float3 worldPos : TEXCOORD0;
+};
+
+float4 main(PSInput input) : SV_Target0
+{
+    float3 finalColor = float3(0.0f, 0.0f, 0.0f);
+
+    for (int i = 0; i < 2; i++)
+    {
+        float3 lightDir = lights[i].Position - input.worldPos;
+        float distance = length(lightDir);
+        lightDir = normalize(lightDir);
+        float attenuation = 1.0 - saturate(distance / lights[i].Range);
+        float3 diffuse = lights[i].Color * lights[i].Intensity * attenuation;
+        finalColor += Color.rgb * diffuse;
+    }
+
+    return float4(finalColor, Color.a);
+}
