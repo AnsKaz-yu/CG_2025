@@ -1,0 +1,63 @@
+Texture2DArray diffuseTexture : register(t0);
+Texture2D normalMap : register(t1);
+SamplerState samplerState : register(s0);
+
+cbuffer LightBuffer : register(b2)
+{
+    struct PointLight
+    {
+        float3 Position;
+        float Range;
+        float3 Color;
+        float Intensity;
+    };
+    PointLight lights[3];
+};
+
+struct PS_INPUT
+{
+    float4 Pos : SV_POSITION;
+    float3 WorldPos : TEXCOORD0;
+    float3 Normal : TEXCOORD1;
+    float2 TexCoord : TEXCOORD2;
+    float3 Tangent : TEXCOORD3;
+    float3 Bitangent : TEXCOORD4;
+    float3 CameraPos : TEXCOORD5;
+    uint TexInd : TEXCOORD6;
+};
+
+float3 CalculateNormalFromMap(float3 normal, float3 tangent, float3 bitangent, float2 texCoord)
+{
+    float3 normalFromMap = normalMap.Sample(samplerState, texCoord).xyz;
+    normalFromMap = normalize(normalFromMap * 2.0f - 1.0f);
+    float3x3 TBN = float3x3(tangent, bitangent, normal);
+    return normalize(mul(normalFromMap, TBN));
+}
+
+float4 main(PS_INPUT input) : SV_Target
+{
+    float3 tangent = normalize(input.Tangent);
+    float3 bitangent = normalize(input.Bitangent);
+    float3 normal = CalculateNormalFromMap(input.Normal, tangent, bitangent, input.TexCoord);
+    float3 viewDir = normalize(input.CameraPos - input.WorldPos);
+    float3 ambientLight = float3(0.0f, 0.0f, 0.0f);
+    float3 lightColor = ambientLight;
+
+    for (int i = 0; i < 3; i++)
+    {
+        float3 lightDir = normalize(lights[i].Position - input.WorldPos);
+        float distance = length(lights[i].Position - input.WorldPos);
+        float attenuation = 1.0 - saturate(distance / lights[i].Range);
+        float diff = max(dot(normal, lightDir), 0.0f);
+        float3 diffuse = lights[i].Color * diff * lights[i].Intensity * attenuation;
+        float3 halfwayDir = normalize(lightDir + viewDir);
+        float spec = pow(max(dot(normal, halfwayDir), 0.0f), 32.0f);
+        float3 specular = lights[i].Color * spec * lights[i].Intensity * attenuation;
+        lightColor += diffuse + specular;
+    }
+
+    float3 diffuseColor = diffuseTexture.Sample(samplerState, 
+                        float3(input.TexCoord, input.TexInd)).rgb;
+    float3 finalColor = diffuseColor * lightColor;
+    return float4(finalColor, 1.0f);
+}
